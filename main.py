@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from typing import Optional
+from typing import Union
 
 app = FastAPI()
 
@@ -10,12 +10,15 @@ async def index():
 
 
 @app.get("/blog")
-async def index(limit=10, published: bool = True, sort: Optional[str] = None):
+async def index(limit=10, published: bool = True, sort: Union[str, None] = None):
     # Only get 10 published blogs
-    if published:
-        return {"data": f"{limit} published blogs from the db"}
+    if not q:
+        if published:
+            return {"data": f"{limit} published blogs from the db"}
+        else:
+            return {"data": f"{limit} blogs from the db"}
     else:
-        return {"data": f"{limit} blogs from the db"}
+        return {"data": f"{limit} blogs from the db", "Union": sort}
 
 
 @app.get("/blog/unpublished")
