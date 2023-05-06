@@ -1,7 +1,14 @@
 from fastapi import FastAPI
 from typing import Union
+from pydantic import BaseModel
 
 app = FastAPI()
+
+
+class Blog(BaseModel):
+    title: str
+    body: str
+    published: Union[bool, None] = None
 
 
 @app.get("/")
@@ -41,3 +48,8 @@ async def comments(id):
 @app.get("/about")
 async def about():
     return {"about": "This is a gpt fastapi demo"}
+
+
+@app.post("/blog")
+async def create_blog(blog: Blog):
+    return {"data": f"Blog is created with title as {blog.title}"}
