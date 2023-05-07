@@ -17,9 +17,9 @@ async def index():
 
 
 @app.get("/blog")
-async def index(limit=10, published: bool = True, sort: Union[str, None] = None):
+async def index(limit = 10, published: bool = True, sort: Union[str, None] = None):
     # Only get 10 published blogs
-    if not q:
+    if not sort:
         if published:
             return {"data": f"{limit} published blogs from the db"}
         else:
