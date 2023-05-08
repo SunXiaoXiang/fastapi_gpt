@@ -8,7 +8,7 @@ app = FastAPI()
 class Blog(BaseModel):
     title: str
     body: str
-    published: Union[bool, None] = None
+    published: bool | None = None
 
 
 @app.get("/")
